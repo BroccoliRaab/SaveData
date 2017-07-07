@@ -16,7 +16,9 @@ This will return the ```success``` and ```error``` values of the ```love.filesys
 This will return the table saved in the file named ```saveFile```
 
 # Example
-``` function love.load()
+``` 
+saveData = require("saveData")
+function love.load()
 t = {}
 t.settings = {graphics = "good"}
 t.settings.window = {x = 10, y = 20}
