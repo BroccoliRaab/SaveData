@@ -17,7 +17,7 @@ This will return the table saved in the file named ```saveFile```
 
 # Example
 ``` 
-saveData = require("saveData")
+local saveData = require("saveData")
 function love.load()
 t = {}
 t.settings = {graphics = "good"}
