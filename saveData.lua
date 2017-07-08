@@ -29,7 +29,7 @@ function saveData.load(saveFile)
 end
 
 function saveData.save(data, saveFile)
-  return = love.filesystem.write(saveFile, formatData2(data))
+  return love.filesystem.write(saveFile, formatData2(data))
 end
 
 return saveData
