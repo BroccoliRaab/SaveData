@@ -1,4 +1,4 @@
--[[
+--[[
 MIT License
 
 Copyright (c) 2017 Robert Herlihy
@@ -29,16 +29,22 @@ local function formatData2(data)
   local finalString = finalStringTemp
   
   local function formatData1(data)
+    local indTypeForm
       for i, v in pairs(data) do
-      if type(v) == "table" then
-        finalString = finalString..i.."= {\r\n"
-        formatData1(v)
-        finalString = finalString.."},\r\n"
-      else
-        if type(v) == "string" then v = [["]]..v..[["]] end
-        finalString = finalString..i.."="..v..",\r\n"
+        if type(i) == "string" then
+          indTypeForm = "[\""..tostring(i).."\"]"
+        else
+          indTypeForm = "["..tostring(i).."]"
+        end
+        if type(v) == "table" then
+          finalString = finalString..indTypeForm.."= {\r\n"
+          formatData1(v)
+          finalString = finalString.."},\r\n"
+        else
+          if type(v) == "string" then v = [["]]..v..[["]] end
+          finalString = finalString..indTypeForm.."="..v..",\r\n"
+        end
       end
-    end
   finalString = finalString:sub(1, string.len(finalString)-3).."\r\n"
   end
 
@@ -48,8 +54,8 @@ local function formatData2(data)
 end
 
 function saveData.load(saveFile)
-  local chunk, err = love.filesystem.load(saveFile)
-  return chunk()
+  local chunk, fileError = love.filesystem.load(saveFile)
+  return chunk(), fileError
 end
 
 function saveData.save(data, saveFile)
