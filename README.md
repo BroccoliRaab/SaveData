@@ -2,7 +2,7 @@
 A Library for Love2D for saving data
 
 # Usage
-This library will save any table into a file to be loaded back in at a later timer.
+This library is capable of saving most tables into a file to be loaded back in at a later timer.
 
 ```saveData.save(data, saveFile)``` 
 
