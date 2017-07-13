@@ -24,6 +24,35 @@ SOFTWARE.
 
 local saveData = {}
 local finalStringTemp = "return { \r\n"
+local function escape(str)
+  local symbols = {
+    bell = "\a",
+    form_feed = "\f",
+    new_line = "\n",
+    carriage_return = "\r",
+    verticle_tab = "\v",
+    backslash = "\\",
+    double_quote = "\"",
+  }
+  local escapedSymbols = {
+    bell = "\\a",
+    form_feed = "\\f",
+    new_line = "\\n",
+    carriage_return = "\\r",
+    verticle_tab = "\\v",
+    backslash = "\\\\",
+    double_quote = "\\\"",
+  }
+  local str2 = str
+  str2 = str2:gsub(symbols.backslash, escapedSymbols.backslash)
+  for i,v in pairs(symbols) do
+    if i ~= "backslash" then
+      str2 = str2:gsub(v, escapedSymbols[i])
+    end
+  end
+  return str2
+end
+
 
 local function formatData2(data)
   local finalString = finalStringTemp
@@ -31,8 +60,9 @@ local function formatData2(data)
   local function formatData1(data)
     local indTypeForm
       for i, v in pairs(data) do
+        assert((type(i) ~= "table"), "Data table cannot have an table as a key reference")
         if type(i) == "string" then
-          indTypeForm = "[\""..tostring(i).."\"]"
+          indTypeForm = "[\""..escape(i).."\"]"
         else
           indTypeForm = "["..tostring(i).."]"
         end
@@ -45,7 +75,7 @@ local function formatData2(data)
           finalString = finalString..indTypeForm.."="..v..",\r\n"
         end
       end
-  finalString = finalString:sub(1, string.len(finalString)-3).."\r\n"
+    finalString = finalString:sub(1, string.len(finalString)-3).."\r\n"
   end
 
   formatData1(data)

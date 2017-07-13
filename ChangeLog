@@ -1,3 +1,7 @@
 7.8.2017 
 Allows for the use of any type of value for an index
 Should the file loading operation fail, saveData.load() will return the error
+
+7.12.2017
+Escapes characters in strings correctly
+Errors if tables are used as key references
