@@ -71,7 +71,7 @@ local function formatData2(data)
           formatData1(v)
           finalString = finalString.."},\r\n"
         else
-          if type(v) == "string" then v = [["]]..v..[["]] end
+          if type(v) == "string" then v = [["]]..escape(v)..[["]] end
           finalString = finalString..indTypeForm.."="..v..",\r\n"
         end
       end
