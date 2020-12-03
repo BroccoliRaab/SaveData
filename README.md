@@ -1,3 +1,6 @@
+# READ THIS
+I wrote this a few years back now and have noticed that it still gets used occasionally. It should work fine, just know that then way I decided to do this makes it extremely trivial to inject lua code into your games from the savefile. Thats what this script does as the savefile is infact just a lua script that returns the table.
+
 # SaveData
 A Library for Love2D for saving data
 
